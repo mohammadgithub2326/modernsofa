@@ -1,7 +1,7 @@
 "use client"
 import { useState } from 'react';
 import axios from 'axios';
-import styles from './Register.module.css';
+import styles from './register.module.css';
 
 const Register = () => {
     const [formData, setFormData] = useState({
