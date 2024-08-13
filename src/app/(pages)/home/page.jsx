@@ -231,6 +231,7 @@ import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import styles from './home.module.css';
+import Image from 'next/image';
 
 const HomePage = () => {
   const [products, setProducts] = useState([]);
@@ -300,7 +301,7 @@ const HomePage = () => {
 
       <div className={styles.slider}>
         { /* Add your slider logic here */ }
-        <img src="https://drive.google.com/uc?id=1Ez2Rog8_SfqTE6wEjGIowirKWL66Q0iQ" alt="Latest" className={styles.sliderImage} />
+        <Image src="https://drive.google.com/uc?id=1Ez2Rog8_SfqTE6wEjGIowirKWL66Q0iQ" alt="Latest" className={styles.sliderImage} />
         <img src="/download.jpeg" alt="Latest" className={styles.sliderImage} />
       </div>
 
