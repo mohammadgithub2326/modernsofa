@@ -1,106 +1,108 @@
 "use client"
 import { useState } from 'react';
-import styles from './register.module.css';
-import { useRouter } from 'next/navigation';
+import axios from 'axios';
+import styles from './Register.module.css';
 
-export default function Register() {
-  const [formData, setFormData] = useState({
-    fname: '',
-    lname: '',
-    email: '',
-    password: '',
-    type: '',
-    mobile: ''
-  });
-  const router = useRouter();
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const response = await fetch('https://modern-sofa.onrender.com/api/v1/users/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(formData)
+const Register = () => {
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        password: '',
+        mobile: '',
+        type: ''
     });
 
-    const result = await response.json();
-    alert(result.message);
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value
+        });
+    };
 
-    if (response.ok) {
-        router.push('/Login');
-      }
-  };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post('http://localhost:5000/api/v1/users/register', formData, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            alert(response.data.message || 'Registration successful!');
+        } catch (error) {
+            alert(error.response?.data?.message || 'An error occurred during registration.');
+        }
+    };
 
-  return (
-    <div className={styles.container}>
-      <h1 className={styles.heading}>Register</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          className={styles.input}
-          type="text"
-          name="fname"
-          placeholder="First Name"
-          value={formData.fname}
-          onChange={handleChange}
-          required
-        />
-        <input
-          className={styles.input}
-          type="text"
-          name="lname"
-          placeholder="Last Name"
-          value={formData.lname}
-          onChange={handleChange}
-          required
-        />
-        <input
-          className={styles.input}
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
-        <input
-          className={styles.input}
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
-        <input
-          className={styles.input}
-          type="text"
-          name="type"
-          placeholder="Type"
-          value={formData.type}
-          onChange={handleChange}
-          required
-        />
-        <input
-          className={styles.input}
-          type="text"
-          name="mobile"
-          placeholder="Mobile"
-          value={formData.mobile}
-          onChange={handleChange}
-          required
-        />
-        <button className={styles.button} type="submit">Register</button>
-      </form>
-    </div>
-  );
-}
+    return (
+        <div className={styles.container}>
+            <h1 className={styles.title}>Registration</h1>
+            <form className={styles.form} onSubmit={handleSubmit}>
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    className={styles.input}
+                    required
+                />
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className={styles.input}
+                    required
+                />
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    className={styles.input}
+                    required
+                />
+                <input
+                    type="text"
+                    name="mobile"
+                    placeholder="Mobile"
+                    value={formData.mobile}
+                    onChange={handleChange}
+                    className={styles.input}
+                    required
+                />
+                <div className={styles.userTypeContainer}>
+                    <label className={styles.radioLabel}>
+                        <input
+                            type="radio"
+                            name="type"
+                            value="customer"
+                            checked={formData.type === 'customer'}
+                            onChange={handleChange}
+                            className={styles.radioInput}
+                        />
+                        Customer
+                    </label>
+                    <label className={styles.radioLabel}>
+                        <input
+                            type="radio"
+                            name="type"
+                            value="owner"
+                            checked={formData.type === 'owner'}
+                            onChange={handleChange}
+                            className={styles.radioInput}
+                        />
+                        Owner
+                    </label>
+                </div>
+                <button type="submit" className={styles.submitButton}>Register</button>
+            </form>
+        </div>
+    );
+};
+
+export default Register;
+

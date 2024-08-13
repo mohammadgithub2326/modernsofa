@@ -1,4 +1,4 @@
-.container {
+/* .container {
     max-width: 600px;
     margin: 0 auto;
     padding: 2rem;
@@ -73,5 +73,132 @@
   
   .submitButton:hover {
     background-color: #0056b3;
-  }
+  } */
   
+
+
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* height: 100vh; */
+    background: linear-gradient(135deg,  #f06, #ffba08);
+    animation: fadeIn 1.5s ease-in-out;
+    padding: 20px;
+}
+
+.title {font-size: 2.5rem;
+  color: white;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  animation: slideDown 0.8s ease;
+}
+
+.form {display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  animation: scaleUp 0.6s ease;
+}
+
+.field {
+    margin-bottom: 15px;
+}
+
+.label {
+    color: #ffba08;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.input,
+.textarea,
+.select {
+    width: 90%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid #ffba08;
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.textarea {
+    resize: vertical;
+    height: 100px;
+}
+
+.dropzone {
+  border: 2px dashed #ffba08;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.dropzone.dragging {
+  border-color: #888;
+}
+
+.placeholder {
+  color: #ffba08;
+  font-size: 16px;
+}
+
+.imagePreview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.imageContainer {
+    position: relative;
+}
+
+.image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 2px solid #ffba08;
+}
+
+.removeButton {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: #f06;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.submitButton {
+    background-color: #f06;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submitButton:hover {
+    background-color: #ff4500;
+}
+
+
+.fileInput{
+
+  display: none;
+}

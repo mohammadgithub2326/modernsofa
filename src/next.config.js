@@ -10,4 +10,15 @@ module.exports = {
       },
     },
   };
+
+  module.exports = {
+    webpack: (config, { isServer }) => {
+      if (!isServer) {
+        config.optimization.providedExports = true; // Enable providedExports optimization
+        config.optimization.usedExports = true;      // Enable usedExports optimization
+      }
+  
+      return config;
+    },
+  };
   
