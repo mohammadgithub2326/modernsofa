@@ -4,10 +4,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import axios from 'axios';
-import Cookies from 'js-cookie';
 import styles from './home.module.css';
-import ImageSlider from '@/components/image';
 import ProductGrid from '@/components/products grid/page';
 
 
