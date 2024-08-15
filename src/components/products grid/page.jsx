@@ -11,7 +11,7 @@ const ProductGrid = () => {
   const router = useRouter();
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/v1/products/getallproducts')
+    axios.get('https://modern-sofa-backend.onrender.com/api/v1/products/getallproducts')
       .then((response) => {
         console.log(response)
         setProducts(response.data.data);
@@ -35,7 +35,7 @@ const ProductGrid = () => {
       return;
     }
 
-    axios.post('http://localhost:5000/api/v1/wishlist/add', { productId }, {
+    axios.post('https://modern-sofa-backend.onrender.com/api/v1/wishlist/add', { productId }, {
       headers: {
         Authorization: `Bearer ${accessToken}`
       }

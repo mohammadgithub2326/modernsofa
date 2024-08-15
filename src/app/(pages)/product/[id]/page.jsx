@@ -67,7 +67,8 @@ const ProductDetails = (props) => {
       // API call to add to wishlist
 
 
-      axios.post('http://localhost:5000/api/v1/wishlist/addtowishlist', {
+      // axios.post('http://localhost:5000/api/v1/wishlist/addtowishlist', {
+      axios.post('https://modern-sofa-backend.onrender.com/api/v1/wishlist/addtowishlist', {
             userId,
             productId
           }, {
