@@ -24,6 +24,7 @@ export default function convertAndUseDriveUrl(url) {
     } catch (error) {
         // Log any unexpected errors that occur during execution
         console.log("An error occurred while converting the URL:", error);
+        alert("url can't be cnverted :"+ error)
         return null;
     }
 }

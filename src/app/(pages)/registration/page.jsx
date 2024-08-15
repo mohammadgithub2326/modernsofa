@@ -4,6 +4,7 @@ import axios from 'axios';
 import styles from './register.module.css';
 
 const Register = () => {
+    const [message,setMessage]=useState("")
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -29,7 +30,9 @@ const Register = () => {
                 }
             });
             alert(response.data.message || 'Registration successful!');
+            setMessage('Login successful!');
         } catch (error) {
+            setMessage(error.response.message);
             alert(error.response?.data?.message || 'An error occurred during registration.');
         }
     };
@@ -99,6 +102,7 @@ const Register = () => {
                     </label>
                 </div>
                 <button type="submit" className={styles.submitButton}>Register</button>
+                {message && <p className={styles.message}>{message}</p>}
             </form>
         </div>
     );

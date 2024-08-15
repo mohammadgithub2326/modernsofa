@@ -8,6 +8,14 @@
   animation: fadeIn 1.5s ease-in-out;
   padding: 20px;
 }
+.message {
+  margin-top: 1rem;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+}
 
 .title {
   font-size: 2.5rem;

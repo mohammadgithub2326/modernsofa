@@ -17,7 +17,8 @@ const ProductGrid = () => {
         setProducts(response.data.data);
       })
       .catch((error) => {
-        console.error('Error fetching products:', error);
+        alert(response.message)
+        console.log('Error fetching products:', error);
       });
   }, []);
 

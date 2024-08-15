@@ -139,6 +139,7 @@ const AddProductPage = () => {
     const [category, setCategory] = useState('');
     const [images, setImages] = useState([]);
     const [addedBy,setAddedBy]=useState('')
+    const [message,setmessage]=useState("")
     const router = useRouter()
 
     const categories = [
@@ -230,18 +231,22 @@ const AddProductPage = () => {
         });
     
         try {
-            await axios.post('http://localhost:5000/api/v1/products/addproduct', formData, {
+            await axios.post('https://modern-sofa-backend.onrender.com/api/v1/products/addproduct', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'Authorization': `Bearer ${accessToken}`,
                     'x-refresh-token': refreshToken
                 },
             });
+        
             alert('Product added successfully');
+            
+            setmessage("Product added successfully")
            
         } catch (error) {
             console.error(error);
             alert('Failed to add product');
+            setmessage("failed to add product : " + error)
         }
         console.log(formData)
     };
@@ -252,6 +257,7 @@ const AddProductPage = () => {
     return (
         <div className={styles.container}>
             <h1 className={styles.title}>Add New Product</h1>
+            {message && <p className={styles.message}>{message}</p>}
             <form onSubmit={handleSubmit} className={styles.form}>
                 <div className={styles.field}>
                     <label className={styles.label}>Product Name</label>
@@ -338,6 +344,7 @@ const AddProductPage = () => {
                 </div>
 
                 <button type="submit" className={styles.submitButton}>Add Product</button>
+
             </form>
         </div>
     );

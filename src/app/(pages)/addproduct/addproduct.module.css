@@ -140,6 +140,14 @@
   cursor: pointer;
   transition: border-color 0.3s ease;
 }
+.message {
+  margin-top: 1rem;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+}
 
 .dropzone.dragging {
   border-color: #888;
