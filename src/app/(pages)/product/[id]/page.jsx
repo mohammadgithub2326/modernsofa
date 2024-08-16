@@ -21,7 +21,7 @@ const ProductDetails = (props) => {
         const accessToken = Cookies.get('accessToken');
         const refreshToken = Cookies.get('refreshToken');
         const response = await axios.post(
-          'https://modern-sofa-backend.onrender.com/api/v1/products/getproduct',
+          'https://modernsofabackend.onrender.com/api/v1/products/getproduct',
           { productId: id },
           {
             headers: {

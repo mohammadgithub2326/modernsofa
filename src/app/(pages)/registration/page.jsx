@@ -24,7 +24,7 @@ const Register = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('https://modern-sofa-backend.onrender.com/api/v1/users/register', formData, {
+            const response = await axios.post('https://modernsofabackend.onrender.com/api/v1/users/register', formData, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
