@@ -167,6 +167,7 @@ const AddProductPage = () => {
     }, []);
     const accessToken = Cookies.get('accessToken');
     const refreshToken = Cookies.get('refreshToken');
+    console.log(accessToken,refreshToken)
     
 
 
