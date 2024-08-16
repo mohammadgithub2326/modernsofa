@@ -252,7 +252,7 @@ const AddProductPage = () => {
     };
     
 
-    if (userType !== 'owner') return null;
+    if (userType !== 'owner') return "you are not a Owner to addproduct";
 
     return (
         <div className={styles.container}>
