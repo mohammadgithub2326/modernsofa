@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import styles from './home.module.css';
 import ProductGrid from '@/components/products grid/page';
+import axios from 'axios';
 
 
 // const convertImageToBase64 = (url) => {
@@ -34,48 +35,14 @@ const HomePage = () => {
   const [username, setUsername] = useState('');
   const pathname = usePathname();
 
-  // useEffect(() => {
-  //   const accessToken = Cookies.get('accessToken');
-    
-  //   if (!accessToken) {
-  //       return (
-  //           <div className={styles.sessionExpired}>
-  //             <p>Your session has ended. Please log in again.</p>
-  //             <a href="/login" className={styles.loginLink}>Login</a>
-  //           </div>
-  //         );
-  //   }
-
-  //   // Decode JWT to get the username (simplified)
-  //   const decodedToken = JSON.parse(atob(accessToken.split('.')[1]));
-  //   setUsername(decodedToken.userName);
-
-  //   // Fetch all products
-  //   axios.get('http://localhost:5000/api/v1/products/getallproducts', {
-  //     headers: { Authorization: `Bearer ${accessToken}` }
-  //   })
-  //   .then(response => setProducts(response.data.data))
-  //   .catch(error => console.error(error));
-  // }, [router]);
-  // console.log(products)
-
-  // const addToWishlist = (productId) => {
-  //   const accessToken = Cookies.get('accessToken');
-  //   const decodedToken = JSON.parse(atob(accessToken.split('.')[1]));
-  //   console.log(decodedToken)
-  //   const userId = decodedToken.id;
-  //   console.log(userId)
-  //   const userName = decodedToken.name;
-
-  //   axios.post('http://localhost:5000/api/v1/wishlist/addtowishlist', {
-  //     userId,
-  //     productId
-  //   }, {
-  //     headers: { Authorization: `Bearer ${accessToken}` }
-  //   })
-  //   .then(() => alert('Product added to wishlist!'))
-  //   .catch(error => console.error(error));
-  // };
+  useEffect(() => {
+    axios.get("https://modernsofabk.onrender.com/api/v1/active/ready")
+  
+    return () => {
+      second
+    }
+  }, [])
+  
 
   const goToProductDetails = (productId) => {
     const id =productId
