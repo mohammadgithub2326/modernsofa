@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import styles from './product.module.css';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
@@ -16,12 +16,14 @@ const ProductDetails = (props) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
+    console.log("Current Path:", usePathname);
     const fetchProductDetails = async () => {
       try {
         const accessToken = Cookies.get('accessToken');
         const refreshToken = Cookies.get('refreshToken');
         const response = await axios.post(
-          'https://modernsofabackend.onrender.com/api/v1/products/getproduct',
+          // 'https://modernsofabackend.onrender.com/api/v1/products/getproduct',
+          'http://localhost:5000/api/v1/products/getproduct',
           { productId: id },
           {
             headers: {
@@ -67,23 +69,49 @@ const ProductDetails = (props) => {
       // API call to add to wishlist
 
 
-      // axios.post('http://localhost:5000/api/v1/wishlist/addtowishlist', {
-      axios.post('https://modern-sofa-backend.onrender.com/api/v1/wishlist/addtowishlist', {
+      axios.post('http://localhost:5000/api/v1/wishlist/addtowishlist', {
+      // axios.post('https://modern-sofa-backend.onrender.com/api/v1/wishlist/addtowishlist', {
             userId,
             productId
           }, {
             headers: { Authorization: `Bearer ${accessToken}` }
           })
           .then(() => alert('Product added to wishlist!'))
-          .catch(error => console.error(error));
+          .catch(error => console.log(error));
       console.log(`Product ${id} ${product?.name} added to wishlist for user ${userId}`);
     } catch (error) {
       console.log('Error adding product to wishlist:', error);
+      alert("error adding product to wishlist please wait")
+        // alert("problem adding the product to wishlist :" + error)  
+      setTimeout(() => {
+        router.push("/Login");
+      }, 5000);
     }
   };
 
   const handleOrderProduct = () => {
-    router.push(`/order?productId=${id}`);
+    try {
+      const accessToken = Cookies.get('accessToken');
+      console.log(accessToken)
+      const decodedToken = decodeToken(accessToken)
+      const userId = decodedToken.userId;
+      console.log(userId)
+      const productId = id
+      // API call to order 
+     
+      axios.post('http://localhost:5000/api/v1/orders/create', {
+      // axios.post('https://modern-sofa-backend.onrender.com/api/v1/wishlist/addtowishlist', {
+            userId,
+            productId
+          }, {
+            headers: { Authorization: accessToken }
+          })
+          .then(() => alert('Product ordered!'))
+          .catch(error => console.log(error));
+      console.log(`Product ${id} ${product?.name} ordered  for user ${userId}`);
+    } catch (error) {
+      console.log(error)
+    }
   };
 
   const handleContactUs = () => {
@@ -127,15 +155,15 @@ const ProductDetails = (props) => {
         <div className={styles.actionButtons}>
           <button className={styles.wishlistButton} onClick={handleAddToWishlist}>Add to Wishlist</button>
           <button className={styles.orderButton} onClick={handleOrderProduct}>Order This Product</button>
-          <button className={styles.contactButton} onClick={handleContactUs}>Contact Us</button>
+          {/* <button className={styles.contactButton} onClick={handleContactUs}>Contact Us</button> */}
         </div>
       </div>
       <div className={styles.contactIcons}>
         <a href="https://instagram.com"><FaInstagram /></a>
         <a href="https://facebook.com"><FaFacebook /></a>
-        <a href="mailto:g.s.dadanoor@gmail.com"><FaEnvelope /></a>
-        <a href="https://wa.me/8374814388"><FaWhatsapp /></a>
-        <a href="tel:8374814388"><FaPhone /></a>
+        <a href="mailto:mohdarif65420@gmail.com"><FaEnvelope /></a>
+        <a href="https://wa.me/+918077557130"><FaWhatsapp /></a>
+        <a href="tel:8077557130"><FaPhone /></a>
       </div>
       <footer className={styles.footer}>
         <p>Developed by Mohammad Noor</p>

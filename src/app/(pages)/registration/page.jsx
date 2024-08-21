@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import styles from './register.module.css';
+import { usePathname } from 'next/navigation';
 
 const Register = () => {
     const [message,setMessage]=useState("")
@@ -14,6 +15,7 @@ const Register = () => {
     });
 
     const handleChange = (e) => {
+        console.log("Current Path:", usePathname);
         const { name, value } = e.target;
         setFormData({
             ...formData,

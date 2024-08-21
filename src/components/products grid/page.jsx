@@ -2,16 +2,19 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from './productsgrid.module.css';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
+import { jwtDecode } from 'jwt-decode';
 
 const ProductGrid = () => {
   const [products, setProducts] = useState([]);
+  const [userId, setUserId] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const router = useRouter();
 
   useEffect(() => {
-    axios.get('https://modernsofabackend.onrender.com/api/v1/products/getallproducts')
+    // axios.get('https://modernsofabackend.onrender.com/api/v1/products/getallproducts')
+    axios.get('http://localhost:5000/api/v1/products/getallproducts')
       .then((response) => {
         console.log(response)
         setProducts(response.data.data);
@@ -30,13 +33,17 @@ const ProductGrid = () => {
   const handleWishlistClick = (productId) => {
     const accessToken = Cookies.get('accessToken');
     const refreshToken = Cookies.get('refreshToken');
+    const decodedToken = jwtDecode(accessToken)
+    console.log(decodedToken)
+    setUserId(decodedToken.userId)
 
     if (!accessToken || !refreshToken) {
       router.push('/login?message=Please login to add to wishlist');
       return;
     }
 
-    axios.post('https://modernsofabackend.onrender.com/api/v1/wishlist/add', { productId }, {
+    axios.post('http://localhost:5000/api/v1/wishlist/addtowishlist', { productId,userId }, {
+    // axios.post('https://modernsofabackend.onrender.com/api/v1/wishlist/add', { productId }, {
       headers: {
         Authorization: `Bearer ${accessToken}`
       }
@@ -50,6 +57,7 @@ const ProductGrid = () => {
   };
 
   const handleProductClick = (productId) => {
+    console.log("Current Path:", usePathname);
     router.push(`/product/${productId}`);
   };
 

@@ -1,50 +1,45 @@
-"use client"
+'use client'
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { FaHeart, FaBoxOpen, FaUser, FaPlusSquare } from 'react-icons/fa';
+import Cookies from 'js-cookie';
+import {jwtDecode} from 'jwt-decode';
+import styles from './temp.module.css';
 
-import React, { useState, useEffect } from 'react';
-const ProductImage = () => {
-  const [base64Image, setBase64Image] = useState(null);
-   const imageUrl = "https://drive.google.com/uc?export=view&id=1Ez2Rog8_SfqTE6wEjGIowirKWL66Q0iQ"
+const Navbar = () => {
+  const [userName, setUserName] = useState('');
+  const [userType, setUserType] = useState('');
+  const router = useRouter();
+
   useEffect(() => {
-    const fetchImage = async () => {
-      try {
-        const base64 = await convertImageToBase64(imageUrl);
-        setBase64Image(base64);
-      } catch (error) {
-        console.error('Error converting image to Base64:', error);
-      }
-    };
-    const convertImageToBase64 = (url) => {
-        return new Promise((resolve, reject) => {
-          const xhr = new XMLHttpRequest();
-          xhr.onload = function() {
-            const reader = new FileReader();
-            reader.onloadend = function() {
-              resolve(reader.result);
-            };
-            reader.readAsDataURL(xhr.response);
-          };
-          xhr.onerror = function() {
-            reject('Image conversion failed');
-          };
-          xhr.open('GET', url, true);
-          xhr.responseType = 'blob';
-          xhr.send();
-        });
-      };
-      
+    const accessToken = Cookies.get('accessToken');
+    if (accessToken) {
+      const decodedToken = jwtDecode(accessToken);
+      setUserName(decodedToken.name);
+      setUserType(decodedToken.type);
+    }
+  }, []);
 
-    fetchImage();
-  }, [imageUrl]);
+  const handleRedirect = (path) => {
+    router.push(path);
+  };
 
   return (
-    <div >
-      {base64Image ? (
-        <img src={base64Image} alt="Product"  />
-      ) : (
-        <p>Loading image...</p>
-      )}
-    </div>
+    <nav className={styles.navbar}>
+      <div className={styles.brandName}>Modern Sofa</div>
+      <div className={styles.welcomeNote}>
+        {userName ? `Welcome, ${userName}` : 'Welcome'}
+      </div>
+      <div className={styles.icons}>
+        <FaHeart className={styles.icon} onClick={() => handleRedirect('/wishlist')} />
+        <FaBoxOpen className={styles.icon} onClick={() => handleRedirect('/orders')} />
+        <FaUser className={styles.icon} onClick={() => handleRedirect('/profile')} />
+        {userType === 'owner' && (
+          <FaPlusSquare className={styles.icon} onClick={() => handleRedirect('/add-product')} />
+        )}
+      </div>
+    </nav>
   );
 };
 
-export default ProductImage;
+export default Navbar;

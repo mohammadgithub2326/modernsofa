@@ -3,7 +3,7 @@
 
 
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import styles from './home.module.css';
 import ProductGrid from '@/components/products grid/page';
 
@@ -32,7 +32,7 @@ import ProductGrid from '@/components/products grid/page';
 const HomePage = () => {
   const [products, setProducts] = useState([]);
   const [username, setUsername] = useState('');
-  const router = useRouter();
+  const pathname = usePathname();
 
   // useEffect(() => {
   //   const accessToken = Cookies.get('accessToken');
@@ -80,6 +80,7 @@ const HomePage = () => {
   const goToProductDetails = (productId) => {
     const id =productId
     router.push(`/product/${id}`);
+    console.log("Current Path:", usePathname);
   };
 //   if (!user) {
 //     return (
@@ -90,7 +91,7 @@ const HomePage = () => {
 //     );
 //   }
 let url;
-
+console.log("Current Path:", pathname);
   return (
     <div className={styles.container}>
       <h1 className={styles.welcome}>Welcome to Modern Sofa, {username}</h1>

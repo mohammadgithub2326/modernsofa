@@ -7,32 +7,48 @@
     background: linear-gradient(135deg, #f06, #ffba08);
     animation: fadeIn 1.5s ease-in-out;
     border-radius: 10px;
-
+    margin-top: 50px;
+    color: white;
   }
+  .loadingMessage {
+    font-size: 1.5rem;
+    color: #333;
+    text-align: center;
+    margin-top: 20px;
+}
   
-  .searchBar {
-    width: 100%;
-    max-width: 400px;
-    padding: 10px;
+  .downloadButton {
     margin-bottom: 20px;
+    padding: 10px 20px;
+    border: none;
     border-radius: 5px;
-    border: 2px solid #ffba08;
-    transition: border-color 0.3s ease;
+    background-color: #ffba08;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
   }
   
-  .searchBar:focus {
-    border-color: #f06;
-    outline: none;
+  .downloadButton:hover {
+    background-color: #f06;
+  } .removeButton {
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ffba08;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .removeButton:hover {
+    background-color: #f06;
   }
   
   .grid {
     display: flex;
     flex-wrap: wrap;
-    overflow-x: hidden;
     gap: 40px;
-    flex-direction: row;
-    
-    align-items: center;
     justify-content: center;
   }
   
@@ -42,16 +58,14 @@
     background: white;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    min-width: 350px;
+    width: 350px;
     height: 300px;
     cursor: pointer;
     animation: scaleUp 0.6s ease;
     position: relative;
   }
   
-  
   .imageContainer {
-    position: relative;
     width: 100%;
     height: 70%;
     overflow: hidden;
@@ -59,57 +73,35 @@
     background: #f06;
   }
   
+  .sliderImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
   .productInfo {
     padding: 10px;
     display: flex;
     justify-content: space-between;
-    align-items: left;
-    /* flex-direction: column; */
-
-  }
-  .slider {
-    position: relative;
-    width: 100%;
-    height: 70%;
-    overflow: hidden;
-    border-radius: 10px 10px 0 0;
-  }
-  
-  .sliderInner {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    transition: transform 0.5s ease-in-out;
-  }
-  
-  .sliderImage {
-    position: relative;
-    flex-shrink: 0;
-    width: 100%;
-    height: 100%;
+    align-items: center;
   }
   
   .productName {
     font-size: 1.2rem;
     color: #333;
-    display: flex;
-    flex-wrap: wrap;
-    /* flex-direction: column; */
-    /* align-items: flex-start; */
   }
   
-  .wishlistIcon {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    color: #ffba08;
+  .removButton {
+    background: yellow;
+    border: #f06;
+    font-size: 0.9rem;
+    color: white;
     cursor: pointer;
     transition: transform 0.3s ease;
-    position: inherit;
   }
   
-  .wishlistIcon:hover {
-    transform: scale(5.2);
+  .removeButton:hover {
+    transform: scale(1.1);
   }
   
   @keyframes fadeIn {

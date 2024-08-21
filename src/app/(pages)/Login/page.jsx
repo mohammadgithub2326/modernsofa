@@ -1,7 +1,7 @@
 "use client"
 import { useState } from 'react';
 import axios from 'axios';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import Cookies from 'js-cookie'; // Import js-cookie for handling cookies
 import styles from './LoginPage.module.css';
 
@@ -12,6 +12,7 @@ const Login = () => {
     });
     const [message, setMessage] = useState('');
     const router = useRouter();
+    console.log("Current Path:", usePathname);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -24,8 +25,8 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            // const response = await axios.post('http://localhost:5000/api/v1/users/login', formData, {
-            const response = await axios.post('https://modernsofabackend.onrender.com/api/v1/users/login', formData, {
+            const response = await axios.post('http://localhost:5000/api/v1/users/login', formData, {
+            // const response = await axios.post('https://modernsofabackend.onrender.com/api/v1/users/login', formData, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -48,6 +49,9 @@ const Login = () => {
             }
         }
     };
+    const handleforgotpassword = ()=>{
+        router.push("/forgotPassword")
+    }
 
     return (
         <div className={styles.container}>
@@ -74,6 +78,9 @@ const Login = () => {
                 <button type="submit" className={styles.submitButton}>Login</button>
                 {message && <p className={styles.message}>{message}</p>}
             </form>
+            <p className={styles.forgotpassword} onClick={handleforgotpassword}>
+            forgotPassword
+            </p>
         </div>
     );
 };
