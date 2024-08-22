@@ -21,6 +21,7 @@ const UpdateProduct = () => {
 
     try {
       const response = await axios.post('https://modern-sofa.onrender.com/api/v1/products/update', {
+      // const response = await axios.post('http://localhost:5000/api/v1/products/update', {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer token',

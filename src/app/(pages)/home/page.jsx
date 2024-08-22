@@ -38,9 +38,6 @@ const HomePage = () => {
   useEffect(() => {
     axios.get("https://modernsofabk.onrender.com/api/v1/active/ready")
   
-    return () => {
-      second
-    }
   }, [])
   
 

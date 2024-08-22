@@ -21,7 +21,7 @@ const OrdersPage = () => {
       return;
     }
 
-    axios.get('http://localhost:5000/api/v1/orders/userorders', {
+    axios.get('https://modernsofabk.onrender.com/api/v1/orders/userorders', {
       headers: {
         Authorization: accessToken,
         'x-refresh-token': refreshToken,

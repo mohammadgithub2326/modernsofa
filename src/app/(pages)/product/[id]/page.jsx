@@ -22,8 +22,8 @@ const ProductDetails = (props) => {
         const accessToken = Cookies.get('accessToken');
         const refreshToken = Cookies.get('refreshToken');
         const response = await axios.post(
-          // 'https://modernsofabackend.onrender.com/api/v1/products/getproduct',
-          'http://localhost:5000/api/v1/products/getproduct',
+          'https://modernsofabk.onrender.com/api/v1/products/getproduct',
+          // 'http://localhost:5000/api/v1/products/getproduct',
           { productId: id },
           {
             headers: {
@@ -69,8 +69,8 @@ const ProductDetails = (props) => {
       // API call to add to wishlist
 
 
-      axios.post('http://localhost:5000/api/v1/wishlist/addtowishlist', {
-      // axios.post('https://modern-sofa-backend.onrender.com/api/v1/wishlist/addtowishlist', {
+      // axios.post('http://localhost:5000/api/v1/wishlist/addtowishlist', {
+      axios.post('https://modernsofabk.onrender.com/api/v1/wishlist/addtowishlist', {
             userId,
             productId
           }, {
@@ -99,8 +99,8 @@ const ProductDetails = (props) => {
       const productId = id
       // API call to order 
      
-      axios.post('http://localhost:5000/api/v1/orders/create', {
-      // axios.post('https://modern-sofa-backend.onrender.com/api/v1/wishlist/addtowishlist', {
+      // axios.post('http://localhost:5000/api/v1/orders/create', {
+      axios.post('https://modernsofabk.onrender.com/api/v1/orders/create', {
             userId,
             productId
           }, {

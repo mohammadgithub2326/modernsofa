@@ -33,7 +33,8 @@ const WishlistPage = () => {
       }
 
       try {
-        const response = await axios.post('http://localhost:5000/api/v1/wishlist/getWishlist',null, {
+        const response = await axios.post('https://modernsofabk.onrender.com/api/v1/wishlist/getWishlist',null, {
+        // const response = await axios.post('http://localhost:5000/api/v1/wishlist/getWishlist',null, {
             headers: {
                 'Authorization': Cookies.get('accessToken'),
                 'x-refresh-token': Cookies.get('refreshToken'),
@@ -63,7 +64,8 @@ const WishlistPage = () => {
 
     try {
         const response = await axios.post(
-            'http://localhost:5000/api/v1/wishlist/downloadWishlist',
+            'https://modernsofabk.onrender.com/api/v1/wishlist/downloadWishlist',
+            // 'http://localhost:5000/api/v1/wishlist/downloadWishlist',
             { userId: userId }, // Replace with actual user ID if available
             {
                 headers: {

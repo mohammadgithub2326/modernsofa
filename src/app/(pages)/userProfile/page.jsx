@@ -21,7 +21,8 @@ export default function UserProfile() {
       return;
     }
 
-    axios.get('http://localhost:5000/api/v1/users/getprofile', {
+    axios.get('https://modernsofabk.onrender.com/api/v1/users/getprofile', {
+    // axios.get('http://localhost:5000/api/v1/users/getprofile', {
       headers: {
         'Authorization': accessToken,
         'x-refresh-token': refreshToken,
@@ -50,7 +51,8 @@ export default function UserProfile() {
     const refreshToken = Cookies.get('refreshToken');
 
     setBuffering(true);
-    axios.put('http://localhost:5000/api/v1/users/updateprofile', userData, {
+    axios.put('https://modernsofabk.onrender.com/api/v1/users/updateprofile', userData, {
+    // axios.put('http://localhost:5000/api/v1/users/updateprofile', userData, {
       headers: {
         'Authorization': accessToken,
         'x-refresh-token': refreshToken,

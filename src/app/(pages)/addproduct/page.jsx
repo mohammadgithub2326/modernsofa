@@ -232,8 +232,8 @@ const AddProductPage = () => {
         });
     
         try {
-            await axios.post('http://localhost:5000/api/v1/products/addproduct', formData, {
-            // await axios.post('https://modernsofabackend.onrender.com/api/v1/products/addproduct', formData, {
+            // await axios.post('http://localhost:5000/api/v1/products/addproduct', formData, {
+            await axios.post('https://modernsofabk.onrender.com/api/v1/products/addproduct', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'Authorization': `Bearer ${accessToken}`,
