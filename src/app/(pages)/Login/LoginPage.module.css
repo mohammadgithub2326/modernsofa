@@ -30,11 +30,12 @@
 }
 
 .input {
-  margin-bottom: 1rem;
+  width: 95%;
   padding: 10px;
-  border: 2px solid #ffba08;
+  margin-bottom: 15px;
   border-radius: 5px;
-  transition: all 0.3s ease;
+  border: 2px solid #ffba08;
+  transition: border-color 0.3s ease;
 }
 
 .input:focus {
@@ -68,6 +69,42 @@
 }
 .forgotpassword{
 cursor: pointer;
+   
+  color:#f06 ;
+text-align: right;
+width: 70%;
+}
+
+
+.passwordContainer {
+  position: relative;
+  width: 99%;
+  margin-bottom: 15px;
+}
+.forgotPasswordandregistor{
+  width: 100%;
+  display: flex;
+  align-content: space-evenly;
+  color: blue;
+}
+.registrationText{
+  color:#f06 ;
+  cursor: pointer;
+  align-self: flex-start;
+}
+.registrationText:hover{
+  color: #ffba08;
+}
+.forgotpassword:hover{
+  color:#ffba08
+}
+.eyeIcon {
+  position: absolute;
+  top: 40%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  /* color: #ffba08; */
 }
 
 @keyframes fadeIn {

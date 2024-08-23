@@ -4,11 +4,13 @@ import { FaHeart, FaBoxOpen, FaUser, FaPlusSquare, FaSignInAlt, FaHome } from 'r
 import Cookies from 'js-cookie';
 import {jwtDecode} from 'jwt-decode';
 import styles from './Navbar.module.css';
+import { useLoading } from '../../context/loadingContext';
 
 const Navbar = () => {
   const [userName, setUserName] = useState('');
   const [userType, setUserType] = useState('');
   const [logged_In,setLogged_In] = useState(Boolean)
+  const { startLoading, stopLoading } = useLoading();
 
   const router = useRouter();
 
@@ -23,8 +25,10 @@ const Navbar = () => {
   }, []);
 
   const handleRedirect = (path) => {
+    startLoading();
     const accessToken = Cookies.get('accessToken');
     router.push(path);
+    stopLoading();
     if (accessToken) {
     } else {
       

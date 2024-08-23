@@ -7,10 +7,12 @@ import styles from './wishlist.module.css';
 import { jwtDecode } from 'jwt-decode';
 import Image from 'next/image';
 
+import { useLoading } from '../../../context/loadingContext';
+
 const WishlistPage = () => {
   const [wishlist, setWishlist] = useState([]);
   const [userId, setUserId] = useState([]);
-  
+  const { startLoading, stopLoading } = useLoading();
   const [loadingMessage, setLoadingMessage] = useState(''); // State for showing loading message
     
   const router = useRouter();
@@ -31,7 +33,7 @@ const WishlistPage = () => {
                 }, 3000);
                 return;
       }
-
+      startLoading();
       try {
         const response = await axios.post('https://modernsofabk.onrender.com/api/v1/wishlist/getWishlist',null, {
         // const response = await axios.post('http://localhost:5000/api/v1/wishlist/getWishlist',null, {
@@ -42,6 +44,7 @@ const WishlistPage = () => {
         });
 
         if (response.status === 200) {
+          stopLoading();
             console.log(response)
           setWishlist(response.data.data);
         }
@@ -61,7 +64,7 @@ const WishlistPage = () => {
     const decodedToken = jwtDecode(accessToken)
         console.log(decodedToken)
         setUserId(decodedToken.userId)
-
+        startLoading();
     try {
         const response = await axios.post(
             'https://modernsofabk.onrender.com/api/v1/wishlist/downloadWishlist',
@@ -81,7 +84,7 @@ const WishlistPage = () => {
         link.href = window.URL.createObjectURL(blob);
         link.download = `${decodedToken.name}wishlist_${new Date().toISOString()}.pdf`;
         document.body.appendChild(link);
-        link.click();
+        link.click();stopLoading();
         document.body.removeChild(link);
     } catch (error) {
         console.error('Error downloading wishlist PDF:', error);

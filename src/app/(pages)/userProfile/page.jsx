@@ -5,10 +5,13 @@ import { useRouter } from 'next/navigation';
 import styles from './userProfile.module.css';
 import Cookies from 'js-cookie';
 
+import { useLoading } from '../../../context/loadingContext';
+
 export default function UserProfile() {
   const [userData, setUserData] = useState(null);
   const [editable, setEditable] = useState(false);
   const [buffering, setBuffering] = useState(false);
+  const { startLoading, stopLoading } = useLoading();
   const router = useRouter();
 
   useEffect(() => {
@@ -20,7 +23,7 @@ export default function UserProfile() {
       router.push('/Login');
       return;
     }
-
+    startLoading();
     axios.get('https://modernsofabk.onrender.com/api/v1/users/getprofile', {
     // axios.get('http://localhost:5000/api/v1/users/getprofile', {
       headers: {
@@ -29,8 +32,10 @@ export default function UserProfile() {
       }
     })
     .then(response => {
+
         console.log(response)
       setUserData(response.data.data);
+      stopLoading();
     })
     .catch(() => {
       alert('Failed to fetch user profile.');
@@ -47,6 +52,7 @@ export default function UserProfile() {
   };
 
   const handleUpdate = () => {
+    startLoading();
     const accessToken = Cookies.get('accessToken');
     const refreshToken = Cookies.get('refreshToken');
 
@@ -60,6 +66,7 @@ export default function UserProfile() {
     })
     .then(() => {
       setBuffering(false);
+      stopLoading();
       alert('Profile updated successfully!');
       setEditable(false);
     })

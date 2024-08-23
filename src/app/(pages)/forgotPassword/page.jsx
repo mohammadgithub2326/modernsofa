@@ -4,12 +4,14 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import styles from './forgotPassword.module.css';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { useLoading } from '../../../context/loadingContext'
 
 const ForgotPasswordPage = () => {
   const [email, setEmail] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [loading, setLoading] = useState(false);
+  const { startLoading, stopLoading } = useLoading();
   const router = useRouter();
 
   const handleSubmit = async (e) => {
@@ -17,10 +19,12 @@ const ForgotPasswordPage = () => {
     setLoading(true);
 
     try {
+      startLoading();
       const response = await axios.post('https://modernsofabk.onrender.com/api/v1/users/forgot-password', { email, newPassword });
     //   const response = await axios.post('http://localhost:5000/api/v1/users/forgot-password', { email, newPassword });
-      
+    stopLoading();
       if (response.data.success) {
+
         alert('Your password has been changed successfully.');
         router.push('/Login');
       }

@@ -4,6 +4,8 @@ import axios from 'axios';
 import { usePathname, useRouter } from 'next/navigation';
 import Cookies from 'js-cookie'; // Import js-cookie for handling cookies
 import styles from './LoginPage.module.css';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { useLoading } from '../../../context/loadingContext';
 
 const Login = () => {
     const [formData, setFormData] = useState({
@@ -12,6 +14,9 @@ const Login = () => {
     });
     const [message, setMessage] = useState('');
     const router = useRouter();
+    
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const { startLoading, stopLoading } = useLoading();
     console.log("Current Path:", usePathname);
 
     const handleChange = (e) => {
@@ -24,6 +29,7 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        startLoading();
         try {
             // const response = await axios.post('http://localhost:5000/api/v1/users/login', formData, {
             const response = await axios.post('https://modernsofabk.onrender.com/api/v1/users/login', formData, {
@@ -32,6 +38,7 @@ const Login = () => {
                 }
             });
             if (response.status === 200) {
+                stopLoading();
                 // Save tokens to cookies
                 Cookies.set('accessToken', response.data.accessToken, { secure: true, sameSite: 'Strict' });
                 Cookies.set('refreshToken', response.data.refreshToken, { secure: true, sameSite: 'Strict' });
@@ -50,7 +57,14 @@ const Login = () => {
         }
     };
     const handleforgotpassword = ()=>{
+        startLoading();
         router.push("/forgotPassword")
+        stopLoading();
+    }
+    const handleRegistrationRedirect = () =>{
+        startLoading();
+        router.push('/registration')
+        stopLoading();
     }
 
     return (
@@ -66,8 +80,10 @@ const Login = () => {
                     className={styles.input}
                     required
                 />
+                <div  className={styles.passwordContainer}>
+
                 <input
-                    type="password"
+                    type={passwordVisible ? 'text' : 'password'}
                     name="password"
                     placeholder="Password"
                     value={formData.password}
@@ -75,12 +91,24 @@ const Login = () => {
                     className={styles.input}
                     required
                 />
+                <span
+            className={styles.eyeIcon}
+            onClick={() => setPasswordVisible(!passwordVisible)}
+          >
+            {passwordVisible ? <FaEyeSlash /> : <FaEye />}
+          </span>
+                    </div>
                 <button type="submit" className={styles.submitButton}>Login</button>
                 {message && <p className={styles.message}>{message}</p>}
-            </form>
+            <div className={styles.forgotPasswordandregistor}>
+            <p  className={styles.registrationText}onClick={handleRegistrationRedirect}>
+                    <u>Registor user</u>
+            </p>
             <p className={styles.forgotpassword} onClick={handleforgotpassword}>
             forgotPassword
             </p>
+            </div>
+            </form>
         </div>
     );
 };

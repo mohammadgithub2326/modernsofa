@@ -129,6 +129,7 @@ import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
+import { useLoading } from '../../../context/loadingContext';
 
 // console.log(jwtDecode)
 const AddProductPage = () => {
@@ -140,6 +141,7 @@ const AddProductPage = () => {
     const [images, setImages] = useState([]);
     const [addedBy,setAddedBy]=useState('')
     const [message,setmessage]=useState("")
+    const { startLoading, stopLoading } = useLoading();
     const router = useRouter()
 
     const categories = [
@@ -150,6 +152,7 @@ const AddProductPage = () => {
     ];
 
     useEffect(() => {
+        startLoading();
        typeof window !== 'undefined'?console.log(true):   console.log(false)
         const token = Cookies.get('accessToken');
         if (token) {
@@ -163,6 +166,7 @@ const AddProductPage = () => {
 
             }
         }
+        stopLoading();
         
     }, []);
     const accessToken = Cookies.get('accessToken');
@@ -230,7 +234,7 @@ const AddProductPage = () => {
         images.forEach((image) => {
             formData.append('images', image);
         });
-    
+        startLoading();
         try {
             // await axios.post('http://localhost:5000/api/v1/products/addproduct', formData, {
             await axios.post('https://modernsofabk.onrender.com/api/v1/products/addproduct', formData, {
@@ -240,7 +244,7 @@ const AddProductPage = () => {
                     'x-refresh-token': refreshToken
                 },
             });
-        
+            stopLoading();
             alert('Product added successfully');
             
             setmessage("Product added successfully")

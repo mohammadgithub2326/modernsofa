@@ -1,59 +1,173 @@
-.navbar {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    background: linear-gradient(135deg, #f06, #ffba08);
-    border-radius: 10px;
-    animation: fadeIn 1.5s ease-in-out;
-  }
-  
-  .brandName {
-    font-size: 2rem;
-    color: white;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  }
-  
-  .welcomeNote {
-    font-size: 1.2rem;
-    color: white;
-    margin-bottom: 20px;
-  }
-  
-  .icons {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-  }
-  
-  .icon {
-    font-size: 2rem;
-    color: white;
-    cursor: pointer;
-    transition: transform 0.3s ease, color 0.3s ease;
-  }
-  
-  .icon:hover {
-    transform: scale(1.2);
-    color: #005bb5;
-  }
-  
-  @media (max-width: 640px) {
-    .brandName {
-      font-size: 1.5rem;
-    }
-  
-    .icon {
-      font-size: 1.5rem;
-    }
-  }
-  
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-  
+.glassContainer {
+  background: rgba(240, 96, 96, 0.5) !important; /* Force the background to show */
+  backdrop-filter: blur(10px) !important;
+  padding: 50px;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.glassTitle {
+  font-size: 2.5rem;
+  color: #f06 !important; /* Ensure text color is applied */
+  margin-bottom: 20px;
+}
+
+.glassCard {
+  background: rgba(255, 255, 255, 0.4) !important; /* Ensure card background is applied */
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+  display: inline-block;
+}
+
+.glassImage {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.glassDescription {
+  color: #333 !important; /* Ensure text color is applied */
+  font-size: 1.2rem;
+}
+
+
+.neuContainer {
+  background: #e0e0e0;
+  padding: 50px;
+  border-radius: 20px;
+  box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff;
+  text-align: center;
+}
+
+.neuTitle {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.neuCard {
+  background: #e0e0e0;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: inset 8px 8px 16px #bebebe, inset -8px -8px 16px #ffffff;
+  margin-top: 20px;
+  display: inline-block;
+}
+
+.neuImage {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.neuDescription {
+  color: #666;
+  font-size: 1.2rem;
+}
+
+
+.materialContainer {
+  background: #f5f5f5;
+  padding: 50px;
+  text-align: center;
+}
+
+.materialTitle {
+  font-size: 2.5rem;
+  color: #6200ea;
+  margin-bottom: 20px;
+}
+
+.materialCard {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  display: inline-block;
+}
+
+.materialImage {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.materialDescription {
+  color: #333;
+  font-size: 1.2rem;
+}
+
+
+.minimalContainer {
+  background: #ffffff;
+  padding: 50px;
+  text-align: center;
+}
+
+.minimalTitle {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.minimalCard {
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #eee;
+  margin-top: 20px;
+  display: inline-block;
+}
+
+.minimalImage {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.minimalDescription {
+  color: #666;
+  font-size: 1.2rem;
+}
+
+
+.retroContainer {
+  background: linear-gradient(135deg, #ff6ec7, #6b73ff);
+  padding: 50px;
+  text-align: center;
+  color: #fff;
+}
+
+.retroTitle {
+  font-size: 2.5rem;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.retroCard {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  display: inline-block;
+}
+
+.retroImage {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.retroDescription {
+  color: #fff;
+  font-size: 1.2rem;
+}

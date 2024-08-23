@@ -1,5 +1,6 @@
 import { Inter } from "next/font/google";
 import Layout from "../components/Layout";
+import { LoadingProvider } from '../context/loadingContext';
 // import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -16,8 +17,10 @@ export default function RootLayout({ children }) {
       
       
       <body className={inter.className}>
+      <LoadingProvider>
         <Layout/>
         {children}
+        </LoadingProvider>
         </body>
       
     </html>

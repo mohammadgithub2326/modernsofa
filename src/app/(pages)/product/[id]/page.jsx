@@ -9,15 +9,19 @@ import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import { FaInstagram, FaFacebook, FaEnvelope, FaWhatsapp, FaPhone } from 'react-icons/fa';
 import {decodeToken} from "@/services/jwt"
 
+import { useLoading } from '../../../../context/loadingContext';
+
 const ProductDetails = (props) => {
   const { id } = props.params;
   const router = useRouter();
   const [product, setProduct] = useState(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const { startLoading, stopLoading } = useLoading();
 
   useEffect(() => {
     console.log("Current Path:", usePathname);
     const fetchProductDetails = async () => {
+      startLoading();
       try {
         const accessToken = Cookies.get('accessToken');
         const refreshToken = Cookies.get('refreshToken');
@@ -33,6 +37,7 @@ const ProductDetails = (props) => {
           }
         );
         setProduct(response.data);
+        stopLoading();
         console.log(response)
       } catch (error) {
         console.error('Error fetching product details:', error);
@@ -68,7 +73,7 @@ const ProductDetails = (props) => {
       const productId = id
       // API call to add to wishlist
 
-
+      startLoading();
       // axios.post('http://localhost:5000/api/v1/wishlist/addtowishlist', {
       axios.post('https://modernsofabk.onrender.com/api/v1/wishlist/addtowishlist', {
             userId,
@@ -76,7 +81,8 @@ const ProductDetails = (props) => {
           }, {
             headers: { Authorization: `Bearer ${accessToken}` }
           })
-          .then(() => alert('Product added to wishlist!'))
+          
+          .then(() => {stopLoading();alert('Product added to wishlist!')})
           .catch(error => console.log(error));
       console.log(`Product ${id} ${product?.name} added to wishlist for user ${userId}`);
     } catch (error) {
@@ -98,7 +104,7 @@ const ProductDetails = (props) => {
       console.log(userId)
       const productId = id
       // API call to order 
-     
+      startLoading();
       // axios.post('http://localhost:5000/api/v1/orders/create', {
       axios.post('https://modernsofabk.onrender.com/api/v1/orders/create', {
             userId,
@@ -106,7 +112,8 @@ const ProductDetails = (props) => {
           }, {
             headers: { Authorization: accessToken }
           })
-          .then(() => alert('Product ordered!'))
+          .then(() => {
+            startLoading();alert('Product ordered!')})
           .catch(error => console.log(error));
       console.log(`Product ${id} ${product?.name} ordered  for user ${userId}`);
     } catch (error) {

@@ -4,11 +4,13 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
 import styles from './orders.module.css';
+import { useLoading } from '../../../context/loadingContext';
 
 const OrdersPage = () => {
   const [orders, setOrders] = useState([]);
   const [username, setUsername] = useState('');
   const [loading, setLoading] = useState(true);
+  const { startLoading, stopLoading } = useLoading();
   const router = useRouter();
 
   useEffect(() => {
@@ -20,7 +22,7 @@ const OrdersPage = () => {
       router.push('/Login');
       return;
     }
-
+    startLoading();
     axios.get('https://modernsofabk.onrender.com/api/v1/orders/userorders', {
       headers: {
         Authorization: accessToken,
@@ -31,6 +33,7 @@ const OrdersPage = () => {
         console.log(response)
       const { data } = response.data;
       setUsername(data.username);
+      stopLoading();
       setOrders(data);
       setLoading(false);
     })

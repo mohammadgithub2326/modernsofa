@@ -3,6 +3,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import styles from './register.module.css';
 import { usePathname } from 'next/navigation';
+import { useLoading } from '../../../context/loadingContext';
 
 const Register = () => {
     const [message,setMessage]=useState("")
@@ -13,6 +14,7 @@ const Register = () => {
         mobile: '',
         type: ''
     });
+    const { startLoading, stopLoading } = useLoading();
 
     const handleChange = (e) => {
         console.log("Current Path:", usePathname);
@@ -25,6 +27,7 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        startLoading();
         try {
             const response = await axios.post('https://modernsofabk.onrender.com/api/v1/users/register', formData, {
             // const response = await axios.post('http://localhost:5000/api/v1/users/register', formData, {
@@ -32,6 +35,7 @@ const Register = () => {
                     'Content-Type': 'application/json'
                 }
             });
+            stopLoading();
             alert(response.data.message || 'Registration successful!');
             setMessage('Login successful!');
         } catch (error) {

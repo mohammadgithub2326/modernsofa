@@ -84,7 +84,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* height: 100vh; */
+    height: 100vh; 
     background: linear-gradient(135deg,  #f06, #ffba08);
     animation: fadeIn 1.5s ease-in-out;
     padding: 20px;
@@ -213,3 +213,7 @@
 
   display: none;
 }
+
+
+
+
