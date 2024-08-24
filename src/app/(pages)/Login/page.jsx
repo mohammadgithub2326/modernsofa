@@ -37,8 +37,8 @@ const Login = () => {
                     'Content-Type': 'application/json'
                 }
             });
+            stopLoading();
             if (response.status === 200) {
-                stopLoading();
                 // Save tokens to cookies
                 Cookies.set('accessToken', response.data.accessToken, { secure: true, sameSite: 'Strict' });
                 Cookies.set('refreshToken', response.data.refreshToken, { secure: true, sameSite: 'Strict' });
