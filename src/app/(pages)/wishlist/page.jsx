@@ -43,8 +43,8 @@ const WishlistPage = () => {
               },
         });
 
+        stopLoading();
         if (response.status === 200) {
-          stopLoading();
             console.log(response)
           setWishlist(response.data.data);
         }
@@ -78,6 +78,7 @@ const WishlistPage = () => {
                 responseType: 'blob', // Important for handling binary data
             }
         );
+        stopLoading();
 
         const blob = new Blob([response.data], { type: 'application/pdf' });
         const link = document.createElement('a');
@@ -98,7 +99,7 @@ if (loadingMessage) {
   return (
     <div className={styles.container}>
       <h1>My Wishlist</h1>
-      <button className={styles.downloadButton} onClick={downloadWishlist}>Download Wishlist</button>
+<button className={styles.downloadButton} onClick={downloadWishlist}></button>
       {wishlist.length === 0 ? (
         <p>Your wishlist is empty</p>
       ) : (

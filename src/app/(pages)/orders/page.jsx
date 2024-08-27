@@ -29,11 +29,11 @@ const OrdersPage = () => {
         'x-refresh-token': refreshToken,
       },
     })
+    stopLoading()
     .then((response) => {
         console.log(response)
       const { data } = response.data;
       setUsername(data.username);
-      stopLoading();
       setOrders(data);
       setLoading(false);
     })

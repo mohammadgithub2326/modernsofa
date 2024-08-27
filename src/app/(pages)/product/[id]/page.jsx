@@ -36,8 +36,8 @@ const ProductDetails = (props) => {
             },
           }
         );
-        setProduct(response.data);
         stopLoading();
+        setProduct(response.data);
         console.log(response)
       } catch (error) {
         console.error('Error fetching product details:', error);
@@ -81,8 +81,8 @@ const ProductDetails = (props) => {
           }, {
             headers: { Authorization: `Bearer ${accessToken}` }
           })
-          
-          .then(() => {stopLoading();alert('Product added to wishlist!')})
+          stopLoading()
+          .then(() => {alert('Product added to wishlist!')})
           .catch(error => console.log(error));
       console.log(`Product ${id} ${product?.name} added to wishlist for user ${userId}`);
     } catch (error) {
@@ -111,9 +111,10 @@ const ProductDetails = (props) => {
             productId
           }, {
             headers: { Authorization: accessToken }
-          })
+          }) 
+          startLoading()
           .then(() => {
-            startLoading();alert('Product ordered!')})
+           alert('Product ordered!')})
           .catch(error => console.log(error));
       console.log(`Product ${id} ${product?.name} ordered  for user ${userId}`);
     } catch (error) {

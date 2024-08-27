@@ -2,8 +2,9 @@
 import { useState } from 'react';
 import axios from 'axios';
 import styles from './register.module.css';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useLoading } from '../../../context/loadingContext';
+useRouter
 
 const Register = () => {
     const [message,setMessage]=useState("")
@@ -15,6 +16,7 @@ const Register = () => {
         type: ''
     });
     const { startLoading, stopLoading } = useLoading();
+    const router = useRouter();
 
     const handleChange = (e) => {
         console.log("Current Path:", usePathname);
@@ -109,6 +111,11 @@ const Register = () => {
                     </label>
                 </div>
                 <button type="submit" className={styles.submitButton}>Register</button>
+                <p onClick={()=>{
+                    router.push("/Login")
+                }}>
+                    Login
+                </p>
                 {message && <p className={styles.message}>{message}</p>}
             </form>
         </div>
