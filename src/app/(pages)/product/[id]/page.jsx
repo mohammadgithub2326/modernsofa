@@ -105,15 +105,15 @@ const ProductDetails = (props) => {
       const productId = id
       // API call to order 
       startLoading();
-      // axios.post('http://localhost:5000/api/v1/orders/create', {
-      axios.post('https://modernsofabk.onrender.com/api/v1/orders/create', {
+      axios.post('http://localhost:5000/api/v1/orders/create', {
+      // axios.post('https://modernsofabk.onrender.com/api/v1/orders/create', {
             userId,
             productId
           }, {
             headers: { Authorization: accessToken }
           }) 
-          startLoading()
           .then(() => {
+            stopLoading();
            alert('Product ordered!')})
           .catch(error => console.log(error));
       console.log(`Product ${id} ${product?.name} ordered  for user ${userId}`);
