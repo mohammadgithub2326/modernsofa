@@ -29,8 +29,8 @@ const OrdersPage = () => {
         'x-refresh-token': refreshToken,
       },
     })
-    stopLoading()
     .then((response) => {
+      stopLoading()
         console.log(response)
       const { data } = response.data;
       setUsername(data.username);
