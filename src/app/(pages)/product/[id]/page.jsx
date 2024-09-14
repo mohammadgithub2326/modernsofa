@@ -112,11 +112,14 @@ const ProductDetails = (props) => {
           }, {
             headers: { Authorization: accessToken }
           }) 
-          .then(() => {
+          .then((response) => {
+            alert(response.data.message)
             stopLoading();
-           alert('Product ordered!')})
+          }
+          )
           .catch(error => console.log(error));
       console.log(`Product ${id} ${product?.name} ordered  for user ${userId}`);
+      stopLoading()
     } catch (error) {
       console.log(error)
     }
